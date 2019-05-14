@@ -5,12 +5,16 @@ from os.path import isfile, join
 import pygame
 from time import sleep
 from picamera import PiCamera
+
+#Bibliothek für Printer:
 from Adafruit_Thermal import *
 from os import listdir
 
 #initialize camera
 camera=PiCamera(resolution = (1920, 1440))
+
 #camera.rotation = 180
+
 # Some variables
 photoPath = '/home/pi/Python-Thermal-Printer/fotobox/'
 photoName = time.strftime("%Y-%m-%d-%H-%M-%S") + "_fotobox.jpg"
@@ -26,6 +30,7 @@ camera.start_preview(fullscreen=False, window=(0,0,1902,1080))
 
 
 #random Pfeffi
+
 def random_pfeffi():
     random_number = random.randint(1,10)
     if random_number is 5:
@@ -36,20 +41,24 @@ def random_pfeffi():
         print "verloren\n"
     return gewinnerTitle
 
+# take picture & save to photoPath (see variabled)
 
 def photo_callback():
-        #mixer = pygame.mixer
-        #path = "/home/pi/ogg"
-        #click_sound=mixer.Sound(path+"/"+"click.ogg")
-        #channel = click_sound.play()
-        # Define filename with timestamp
-        photoName = time.strftime("%Y-%m-%d-%H-%M-%S") + "_fotobox.jpg"
-        camera.capture(photoPath+photoName)
-	#camera.capture(photoPath + photoName)#time.strftime("%y%m%d_%H-%M-%S") + ".jpg")
-        # Take photo using "raspistill"
-        #os.system("sudo raspistill -p '144,48,512,384' --vflip -w 1920 -h 1440 -o " + photoPath + photoName)
-        # Resize the high res photo to create thumbnail
-	Image.open(photoPath + photoName).resize(photoResize, Image.ANTIALIAS).save(photoPath + "thumbnail.jpg")
+    #mixer = pygame.mixer
+    #path = "/home/pi/ogg"
+    #click_sound=mixer.Sound(path+"/"+"click.ogg")
+    #channel = click_sound.play()
+    # Define filename with timestamp
+    photoName = time.strftime("%Y-%m-%d-%H-%M-%S") + "_fotobox.jpg"
+    camera.capture(photoPath+photoName)
+
+    # ALTERNATIV: Take photo using "raspistill"
+    #os.system("sudo raspistill -p '144,48,512,384' --vflip -w 1920 -h 1440 -o " + photoPath + photoName)
+    # Resize the high res photo to create thumbnail
+    Image.open(photoPath + photoName).resize(photoResize, Image.ANTIALIAS).save(photoPath + "thumbnail.jpg")
+
+
+# open the picture taken in photo_callback & print it using the adafruit printer.
 
 def print_callback():
         # Rotate the thumbnail for printing
@@ -66,6 +75,7 @@ def print_callback():
         printer.feed(3)
 
 
+# Play random Sound from directory "home/pi//ogg" before picture
 
 def play_random_sound():
     mixer=pygame.mixer
@@ -82,30 +92,31 @@ def play_random_sound():
     randomnum = random.randint(0,len(onlyoggfiles)-1)
 
     play_sound = mixer.Sound(path + "/" + onlyoggfiles[randomnum])
-    #pygame.mixer.music.play()
     channel = play_sound.play()
-    #pygame.mixer.music.load("/home/pi/ogg/sexy.ogg")
-    #pygame.mixer.music.play()
+
     while channel.get_busy():
         print "playing.."
     print "finished"
+
+    #TODO: Click-Sound:
     #click_sound = mixer.Sound(path + "/" + "click.ogg")
     #channel = click_sound.play()
 
 
-#init pygame for mouseclick
+#init pygame for mouseclick (to take foto - ersetzbar durch Knopfdruck)
 pygame.init()
+
 #pygame.mixer.init()
 #pygame.mixer.music.load("/home/pi/ogg/sexy.ogg")
 #pygame.mixer.music.play()
 #print "\nsound played"
 
-while True:
-    for event in pygame.event.get():
-        if(event.type == pygame.MOUSEBUTTONDOWN):
-            print("nice")
-            #takePicture()
-            #play_random_sound()
-            photo_callback()
-            print_callback()
-            pygame.event.clear()
+#Dauerschleife
+while True: 
+    #WARTE auf ein Ereignis:
+    for event in pygame.event.get():        
+        if(event.type == pygame.MOUSEBUTTONDOWN):   # WENN Knopf gedrückt wird
+            #play_random_sound()                    #wird random sound geplayed - brauchen wir nicht
+            photo_callback()        #DANN mache Foto
+            print_callback()        #DANN druck das ganze
+            pygame.event.clear()    #lösche alles, beginne wieder mit warten auf Knopfdruck

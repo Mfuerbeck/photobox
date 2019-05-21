@@ -20,6 +20,7 @@ Python-Thermal-Printer
 
 - Erklärung, warum GPIO.Button mit Ground verbunden :   https://www.makeuseof.com/tag/add-button-raspberry-pi-project/
 
+- Von dem Typen hab ich ausm Code die Image.resize und die Geschichte mit dem Thumbnail geklaut:  http://frederickvandenbosch.be/?p=1297
 ================================================
 
 # Nicht nötig für euch: 

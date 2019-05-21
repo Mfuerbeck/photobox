@@ -15,3 +15,6 @@ Python-Thermal-Printer
 - Autostart: 	https://www.instructables.com/id/Raspberry-Pi-Launch-Python-script-on-startup/
 
 - Image & Camera bibliothek von Python anschauen
+
+
+- STARTEN mit:  sudo python start_fotobox.py

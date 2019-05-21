@@ -2,6 +2,8 @@ Python-Thermal-Printer
 ======================
 # Starten mit: sudo python start_fotobox.py
 
+- Ordner: cd /home/pi/photobox
+
 # Links:
 
 - https://learn.adafruit.com/networked-thermal-printer-using-cups-and-raspberry-pi/overview (alle schritte)

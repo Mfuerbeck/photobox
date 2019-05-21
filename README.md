@@ -18,3 +18,5 @@ Python-Thermal-Printer
 
 
 - STARTEN mit:  sudo python start_fotobox.py
+
+- Erklärung, warum GPIO.Button mit Ground verbunden :   https://www.makeuseof.com/tag/add-button-raspberry-pi-project/

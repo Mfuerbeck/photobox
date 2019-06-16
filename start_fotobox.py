@@ -45,7 +45,7 @@ def take_photo():
     #Mache das Foto, speichere in /home/pi/photobox/fotos/DATUM_fotobox.jpg
     camera.capture(photoPath+photoName)
 
-    # RGERADE gemachtes Foto öffnen, kleiner machen , sichern als "thumbnail.jpg" (wird immer überschrieben)
+    # GERADE gemachtes Foto öffnen, kleiner machen , sichern als "thumbnail.jpg" (wird immer überschrieben)
     Image.open(photoPath + photoName).resize(photoResize, Image.ANTIALIAS).save(photoPath + "thumbnail.jpg")
 
 

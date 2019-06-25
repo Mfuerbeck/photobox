@@ -27,8 +27,7 @@ camera=PiCamera(resolution = (1920, 1080))
 photoPath = '/home/pi/photobox/fotos/'
 photoName = time.strftime("%Y-%m-%d-%H-%M-%S") + "_fotobox.jpg"
 photoResize = 512, 384
-photoTitle = "Projekt " + time.strftime("%Y-%m-%d-%H-%M") + "\n Magga"
-gewinnerTitle = " "
+photoTitle = "Projekt " + time.strftime("%Y-%m-%d-%H-%M") + "\n"
 
 #define printer (19200 ist die baudrate (siehe tutorial))
 printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
